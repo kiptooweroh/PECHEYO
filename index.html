@@ -6,49 +6,258 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pecheyo Church | Home</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <style>
+        /* ===== Global Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* ===== Top Navbar ===== */
+        .top-nav {
+            width: 100%;
+            background: #2d2d7f;
+            color: white;
+            padding: 15px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-nav h2 {
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .top-menu {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        .top-menu li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .top-menu li a.active,
+        .top-menu li a:hover {
+            color: #ffcc00;
+        }
+
+        /* ===== Left Sidebar ===== */
+        .sidebar {
+            width: 220px;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            background: #34495e;
+            color: white;
+            height: 100%;
+            padding-top: 20px;
+            transition: transform 0.3s ease;
+            z-index: 900;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 10px 20px;
+        }
+
+        .sidebar ul li a,
+        .sidebar ul li button {
+            color: white;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li button:hover {
+            background: #2d2d7f;
+        }
+
+        .dropdown-container {
+            display: none;
+            list-style: none;
+            padding-left: 15px;
+        }
+
+        /* ===== Hamburger Toggle ===== */
+        #menuToggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: white;
+            z-index: 1100;
+            cursor: pointer;
+        }
+
+        /* ===== Main Content ===== */
+        .main-content {
+            flex: 1;
+            margin-left: 240px;
+            margin-top: 80px;
+            padding: 20px;
+        }
+
+        .hero {
+            background: url('../assets/hero.jpg') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: black;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            background-color: #2d2d7f;
+            color: white;
+            padding: 20px 0;
+            font-size: 0.9em;
+            margin-top: auto;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            #menuToggle {
+                display: block;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                margin-top: 100px;
+            }
+
+            .top-menu {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Hamburger button -->
+    <button id="menuToggle">&#9776;</button>
 
-    <header>
-        <nav>
-            <h2>PECHEYO CHURCH</h2>
-            <ul>
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="sermons.html">Live Sermons</a></li>
-                <li><a href="announcements.html">Announcements</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <ul>
+            <li><button class="dropdown-btn">Services ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="services.html#sunday">Sunday Service</a></li>
+                    <li><a href="services.html#wednesday">Wednesday Bible Study</a></li>
+                    <li><a href="services.html#friday">Friday Prayer Meeting</a></li>
+                </ul>
+            </li>
+            <li><button class="dropdown-btn">Sermons ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="sermons.html#live">Live Sermons</a></li>
+                    <li><a href="sermons.html#recorded">Recorded Sermons</a></li>
+                </ul>
+            </li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </aside>
 
-    <div class="hero">
-        <h1>WELCOME TO PEFA CHESOEN Church<br>“A Place of Worship, Love and Truth”</h1>
-    </div>
+    <!-- Top Navbar -->
+    <nav class="top-nav">
+        <h2>PECHEYO CHURCH</h2>
+        <ul class="top-menu">
+            <li><a class="active" href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="sermons.html">Live Sermons</a></li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
-    <div class="container">
-        <section>
-            <h2>Weekly Service Schedule</h2>
-            <p><strong>Sunday Service:</strong> 9:00AM – 12:30PM</p>
-            <p><strong>Wednesday Bible Study:</strong> 6:00PM – 8:00PM</p>
-            <p><strong>Friday Prayer Meeting:</strong> 7:00PM – 9:00PM</p>
-        </section>
-
-        <section>
-            <h2>Latest Announcement</h2>
-            <div id="latestAnnouncement"></div>
-        </section>
-
-        <section>
-            <h2>All Announcements</h2>
-            <div id="allAnnouncements"></div>
-        </section>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="hero">
+            <h1>WELCOME TO PEFA CHESOEN Church<br>“A Place of Worship, Love and Truth”</h1>
+        </div>
+        <div class="container">
+            <section>
+                <h2>Weekly Service Schedule</h2>
+                <p><strong>Sunday Service:</strong> 9:00AM – 12:30PM</p>
+                <p><strong>Wednesday Bible Study:</strong> 6:00PM – 8:00PM</p>
+                <p><strong>Friday Prayer Meeting:</strong> 7:00PM – 9:00PM</p>
+            </section>
+            <section>
+                <h2>Latest Announcement</h2>
+                <div id="latestAnnouncement"></div>
+            </section>
+            <section>
+                <h2>All Announcements</h2>
+                <div id="allAnnouncements"></div>
+            </section>
+        </div>
     </div>
 
     <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
@@ -58,8 +267,24 @@
         const latestContainer = document.getElementById("latestAnnouncement");
         const allContainer = document.getElementById("allAnnouncements");
         listenToAnnouncements(latestContainer, allContainer);
-    </script>
 
+        // Sidebar dropdowns
+        const dropdowns = document.querySelectorAll(".dropdown-btn");
+        dropdowns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                const dropdown = btn.nextElementSibling;
+                dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+            });
+        });
+
+        // Hamburger toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+        });
+    </script>
 </body>
 
 </html>

@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | Pecheyo Church</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <header>
-        <nav>
-            <h2>PECHEY0 CHURCH</h2>
-            <ul>
+        <nav class="top-nav">
+            <h2>PECHEYO CHURCH</h2>
+            <ul class="top-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a class="active" href="services.html">Services</a></li>
@@ -22,30 +23,59 @@
         </nav>
     </header>
 
-    <div class="page-banner">Our Services</div>
-
-    <div class="container">
-
-        <h2>Weekly Service Schedule</h2>
+    <aside class="sidebar">
         <ul>
-            <li><strong>Sunday Service:</strong> 9:00 AM – 12:30 PM</li>
-            <li><strong>Wednesday Bible Study:</strong> 6:00 PM – 8:00 PM</li>
-            <li><strong>Friday Prayer Meeting:</strong> 7:00 PM – 9:00 PM</li>
+            <li><button class="dropdown-btn">Services ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="#sunday">Sunday Service</a></li>
+                    <li><a href="#wednesday">Wednesday Bible Study</a></li>
+                    <li><a href="#friday">Friday Prayer Meeting</a></li>
+                </ul>
+            </li>
+            <li><button class="dropdown-btn">Sermons ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="sermons.html#live">Live Sermons</a></li>
+                    <li><a href="sermons.html#recorded">Recorded Sermons</a></li>
+                </ul>
+            </li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
+    </aside>
 
-        <h2>Special Services</h2>
-        <ul>
-            <li>Dedication – First Sunday of every month</li>
-            <li>Youth Sunday – Last Sunday of every month</li>
-            <li>Night of Prayer – Every last Friday (9PM – 05AM)</li>
-        </ul>
-
+    <div class="main-content">
+        <div class="page-banner">Our Services</div>
+        <div class="container">
+            <section id="sunday">
+                <h2>Sunday Service</h2>
+                <p>Time: 9:00AM – 12:30PM</p>
+                <p>A time of worship, teaching, and fellowship for all ages.</p>
+            </section>
+            <section id="wednesday">
+                <h2>Wednesday Bible Study</h2>
+                <p>Time: 6:00PM – 8:00PM</p>
+                <p>Deep dive into scripture to strengthen faith and understanding.</p>
+            </section>
+            <section id="friday">
+                <h2>Friday Prayer Meeting</h2>
+                <p>Time: 7:00PM – 9:00PM</p>
+                <p>Join together in prayer for guidance, healing, and community needs.</p>
+            </section>
+        </div>
     </div>
 
-    <footer>
-        © 2025 Pecheyo Church | All Rights Reserved
-    </footer>
+    <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
 
+    <script>
+        const dropdowns = document.querySelectorAll(".dropdown-btn");
+        dropdowns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                const dropdown = btn.nextElementSibling;
+                dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+            });
+        });
+    </script>
 </body>
 
 </html>

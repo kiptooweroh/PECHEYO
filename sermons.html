@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Sermons | Pecheyo Church</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-
     <header>
-        <nav>
-            <h2>PECHEY0 CHURCH</h2>
-            <ul>
+        <nav class="top-nav">
+            <h2>PECHEYO CHURCH</h2>
+            <ul class="top-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -22,21 +23,58 @@
         </nav>
     </header>
 
-    <div class="page-banner">Live Sermons</div>
+    <aside class="sidebar">
+        <ul>
+            <li><button class="dropdown-btn">Services ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="services.html#sunday">Sunday Service</a></li>
+                    <li><a href="services.html#wednesday">Wednesday Bible Study</a></li>
+                    <li><a href="services.html#friday">Friday Prayer Meeting</a></li>
+                </ul>
+            </li>
+            <li><button class="dropdown-btn">Sermons ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="#live">Live Sermons</a></li>
+                    <li><a href="#recorded">Recorded Sermons</a></li>
+                </ul>
+            </li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </aside>
 
-    <div class="container">
-        <h2>Watch Live</h2>
+    <div class="main-content">
+        <div class="page-banner">Live & Recorded Sermons</div>
+        <div class="container">
+            <section id="live">
+                <h2>Live Sermons</h2>
+                <p>Join our live Sunday service at 9:00AM via YouTube or Facebook Live.</p>
+                <iframe width="100%" height="400"
+                    src="https://www.youtube.com/embed/live_stream?channel=YOUR_CHANNEL_ID" frameborder="0"
+                    allowfullscreen></iframe>
+            </section>
 
-        <iframe width="100%" height="450" src="https://www.youtube.com/embed/3G2XUKRSTq8?autoplay=0" title="Live Sermon"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-
+            <section id="recorded">
+                <h2>Recorded Sermons</h2>
+                <p>Watch previous sermons at your convenience.</p>
+                <iframe width="100%" height="400" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0"
+                    allowfullscreen></iframe>
+            </section>
+        </div>
     </div>
 
-    <footer>© 2025 Pecheyo Church</footer>
+    <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
 
+    <script>
+        const dropdowns = document.querySelectorAll(".dropdown-btn");
+        dropdowns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                const dropdown = btn.nextElementSibling;
+                dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | Pecheyo Church</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
-        <nav>
-            <h2>PECHEY0 CHURCH</h2>
-            <ul>
+        <nav class="top-nav">
+            <h2>PECHEYO CHURCH</h2>
+            <ul class="top-menu">
                 <li><a href="index.html">Home</a></li>
                 <li><a class="active" href="about.html">About</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -21,59 +23,63 @@
         </nav>
     </header>
 
-    <div class="page-banner">About Pecheyo Church</div>
-
-    <div class="container">
-
-        <h2>Our Doctrine</h2>
-        <p>
-            Pecheyo Church stands firmly on the foundation of the Holy Scriptures.
-            We believe in:
-        </p>
-
+    <aside class="sidebar">
         <ul>
-            <li>The Holy Trinity — Father, Son & Holy Spirit</li>
-            <li>Salvation through Jesus Christ alone</li>
-            <li>Baptism by water and the Holy Spirit</li>
-            <li>The authority of the Bible as the inspired Word of God</li>
-            <li>Evangelism, holiness and discipleship</li>
-            <li>Second coming of our Lord Jesus Christ</li>
+            <li><button class="dropdown-btn">Services ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="services.html#sunday">Sunday Service</a></li>
+                    <li><a href="services.html#wednesday">Wednesday Bible Study</a></li>
+                    <li><a href="services.html#friday">Friday Prayer Meeting</a></li>
+                </ul>
+            </li>
+            <li><button class="dropdown-btn">Sermons ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="sermons.html#live">Live Sermons</a></li>
+                    <li><a href="sermons.html#recorded">Recorded Sermons</a></li>
+                </ul>
+            </li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
         </ul>
+    </aside>
 
-        <h2>Church Leadership</h2>
-
-        <div class="leader">
-            <img src="assets/pastor.jpg" width="200">
-            <h3>Senior Bishop: Bishop. Stephen Rotich</h3>
-            <p>25 years of ministry experience in teaching, prophecy and leadership.</p>
+    <div class="main-content">
+        <div class="page-banner">About Us</div>
+        <div class="container">
+            <section>
+                <h2>Our Mission</h2>
+                <p>Pecheyo Church exists to spread the love of Christ, nurture spiritual growth, and serve our community
+                    with faith and compassion.</p>
+            </section>
+            <section>
+                <h2>Our Vision</h2>
+                <p>To be a place where everyone can experience God’s presence, grow in faith, and live a life of purpose
+                    and service.</p>
+            </section>
+            <section>
+                <h2>Our Values</h2>
+                <ul>
+                    <li>Faith</li>
+                    <li>Compassion</li>
+                    <li>Integrity</li>
+                    <li>Community</li>
+                </ul>
+            </section>
         </div>
-
-        <div>
-            <h3>Associate Pastors</h3>
-            <ul>
-                <li>Pastor Stanley Rono — Youth & Outreach</li>
-                <li>Pastor Jonathan — Worship & Music</li>
-            </ul>
-        </div>
-
-        <div>
-            <h3>Church Departments</h3>
-            <ul>
-                <li>Men’s Ministry</li>
-                <li>Women’s Fellowship</li>
-                <li>Youth Department</li>
-                <li>Children’s Ministry</li>
-                <li>Media & Technical Team</li>
-                <li>Prayer & Intercession</li>
-            </ul>
-        </div>
-
     </div>
 
-    <footer>
-        © 2025 Pecheyo Church
-    </footer>
+    <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
 
+    <script>
+        const dropdowns = document.querySelectorAll(".dropdown-btn");
+        dropdowns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                const dropdown = btn.nextElementSibling;
+                dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+            });
+        });
+    </script>
 </body>
 
 </html>

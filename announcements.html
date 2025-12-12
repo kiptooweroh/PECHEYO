@@ -4,65 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pecheyo Church | Post Announcements</title>
+    <title>Announcements | Pecheyo Church</title>
     <link rel="stylesheet" href="style.css">
-
-    <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 
 <body>
-
     <header>
-        <nav>
+        <nav class="top-nav">
             <h2>PECHEYO CHURCH</h2>
-            <ul>
+            <ul class="top-menu">
                 <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="sermons.html">Live Sermons</a></li>
                 <li><a class="active" href="announcements.html">Announcements</a></li>
-                <li><a href="#" id="logoutBtn">Logout</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="container">
-        <h2>Post Announcement (Secretary Only)</h2>
-        <form id="announcementForm">
-            <input type="text" id="title" placeholder="Announcement Title" required>
-            <textarea id="message" placeholder="Announcement Details" required></textarea>
-            <button type="submit">Save Announcement</button>
-        </form>
+    <aside class="sidebar">
+        <ul>
+            <li><button class="dropdown-btn">Services ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="services.html#sunday">Sunday Service</a></li>
+                    <li><a href="services.html#wednesday">Wednesday Bible Study</a></li>
+                    <li><a href="services.html#friday">Friday Prayer Meeting</a></li>
+                </ul>
+            </li>
+            <li><button class="dropdown-btn">Sermons ▾</button>
+                <ul class="dropdown-container">
+                    <li><a href="sermons.html#live">Live Sermons</a></li>
+                    <li><a href="sermons.html#recorded">Recorded Sermons</a></li>
+                </ul>
+            </li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </aside>
 
-        <h2>All Announcements</h2>
-        <div id="announcementList"></div>
+    <div class="main-content">
+        <div class="page-banner">Church Announcements</div>
+        <div class="container">
+            <section>
+                <h2>Latest Announcements</h2>
+                <div id="latestAnnouncement"></div>
+            </section>
+
+            <section>
+                <h2>All Announcements</h2>
+                <div id="allAnnouncements"></div>
+            </section>
+        </div>
     </div>
 
     <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
 
     <script src="js/firebaseConfig.js"></script>
     <script>
-        const form = document.getElementById("announcementForm");
-        const announcementList = document.getElementById("announcementList");
+        const latestContainer = document.getElementById("latestAnnouncement");
+        const allContainer = document.getElementById("allAnnouncements");
+        listenToAnnouncements(latestContainer, allContainer);
 
-        // Listen in real-time
-        listenToAnnouncements(null, announcementList);
-
-        // Post new announcement
-        form.addEventListener("submit", e => {
-            e.preventDefault();
-            const title = document.getElementById("title").value;
-            const message = document.getElementById("message").value;
-
-            postAnnouncement(title, message)
-                .then(() => {
-                    form.reset();
-                    alert("Announcement posted successfully!");
-                })
-                .catch(err => console.error("Error posting announcement:", err));
+        const dropdowns = document.querySelectorAll(".dropdown-btn");
+        dropdowns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btn.classList.toggle("active");
+                const dropdown = btn.nextElementSibling;
+                dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
+            });
         });
     </script>
-
 </body>
 
 </html>

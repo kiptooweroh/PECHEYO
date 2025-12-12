@@ -1,4 +1,4 @@
-/* ======== Global Styles ======== */
+/* ===== Global Styles ===== */
 * {
     margin: 0;
     padding: 0;
@@ -6,66 +6,149 @@
     font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+html,
 body {
-    /* Elegant gradient background */
+    height: 100%;
+}
+
+/* Use flex column to keep footer at bottom */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     color: #333;
-    min-height: 100vh;
     line-height: 1.6;
 }
 
-/* Header */
-header {
+/* ===== Top Navbar ===== */
+.top-nav {
+    width: 100%;
     background: #2d2d7f;
     color: white;
-    padding: 20px 40px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-nav {
+    padding: 15px 40px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-nav ul {
-    display: flex;
+.top-nav h2 {
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+
+.top-menu {
     list-style: none;
+    display: flex;
     gap: 25px;
 }
 
-nav ul li a {
+.top-menu li a {
     color: white;
     text-decoration: none;
     font-weight: 600;
-    transition: color 0.3s;
 }
 
-nav ul li a:hover,
-nav ul li a.active {
+.top-menu li a.active,
+.top-menu li a:hover {
     color: #ffcc00;
+}
+
+/* ===== Left Sidebar ===== */
+.sidebar {
+    width: 220px;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    background: #34495e;
+    color: white;
+    height: 100%;
+    padding-top: 20px;
+    transition: transform 0.3s ease;
+    z-index: 900;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+}
+
+.sidebar ul li a,
+.sidebar ul li button {
+    color: white;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.sidebar ul li a:hover,
+.sidebar ul li button:hover {
+    background: #2d2d7f;
+}
+
+.dropdown-container {
+    display: none;
+    list-style: none;
+    padding-left: 15px;
+}
+
+/* ===== Hamburger Toggle ===== */
+#menuToggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: white;
+    z-index: 1100;
+    cursor: pointer;
+}
+
+/* ===== Main Content ===== */
+.main-content {
+    flex: 1;
+    /* Grow to push footer down */
+    margin-left: 240px;
+    /* space for sidebar */
+    margin-top: 80px;
+    /* space for navbar */
+    padding: 20px;
 }
 
 /* Hero Section */
 .hero {
     background: url('../assets/hero.jpg') center/cover no-repeat;
-    height: 70vh;
+    height: 60vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     color: black;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     border-radius: 8px;
-    margin: 20px auto;
-    width: 90%;
+    margin-bottom: 40px;
 }
 
 .hero h1 {
     font-size: 48px;
-    text-align: center;
 }
 
-/* Page Title Banner */
+/* Page Banner */
 .page-banner {
     background: #2d2d7f;
     color: white;
@@ -74,18 +157,16 @@ nav ul li a.active {
     font-size: 32px;
     font-weight: bold;
     border-radius: 6px;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
-/* Content */
+/* Containers */
 .container {
-    width: 85%;
-    margin: auto;
-    padding: 40px 0;
-}
-
-section {
-    margin-bottom: 50px;
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
 }
 
 /* Announcements */
@@ -134,37 +215,12 @@ form button:hover {
 /* Footer */
 footer {
     text-align: center;
-    background: #2d2d7f;
-    padding: 20px;
-    color: white;
-    margin-top: 40px;
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 36px;
-    }
-
-    nav ul {
-        gap: 15px;
-    }
-
-    .container {
-        width: 95%;
-        padding: 20px 0;
-    }
-}
-
-footer {
-    background-color: #007BFF;
+    background-color: #2d2d7f;
     color: white;
     padding: 20px 0;
-    text-align: center;
     font-size: 0.9em;
-    margin-top: 40px;
+    margin-top: auto;
+    /* Push footer to bottom */
 }
 
 footer a {
@@ -176,5 +232,44 @@ footer a {
 
 footer a:hover {
     color: #FFD700;
-    /* Gold hover effect */
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 180px;
+    }
+
+    .main-content {
+        margin-left: 190px;
+    }
+}
+
+@media (max-width: 768px) {
+    #menuToggle {
+        display: block;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        position: fixed;
+        top: 70px;
+        left: 0;
+        height: 100%;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        margin-top: 100px;
+        padding: 20px;
+    }
+
+    .top-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
