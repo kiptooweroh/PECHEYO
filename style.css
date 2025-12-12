@@ -18,6 +18,8 @@ body {
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     color: #333;
     line-height: 1.6;
+    padding-top: 95px;
+    /* Global fix for navbar height */
 }
 
 /* ===== Top Navbar ===== */
@@ -34,6 +36,7 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 80px;
 }
 
 .top-nav h2 {
@@ -61,11 +64,12 @@ body {
 .sidebar {
     width: 220px;
     position: fixed;
-    top: 70px;
+    top: 95px;
+    /* below navbar */
     left: 0;
     background: #34495e;
     color: white;
-    height: 100%;
+    height: calc(100% - 95px);
     padding-top: 20px;
     transition: transform 0.3s ease;
     z-index: 900;
@@ -107,7 +111,7 @@ body {
 #menuToggle {
     display: none;
     position: fixed;
-    top: 15px;
+    top: 23px;
     left: 15px;
     width: 35px;
     height: 30px;
@@ -140,8 +144,8 @@ body {
 /* ===== Main Content ===== */
 .main-content {
     flex: 1;
-    margin-left: 240px;
-    margin-top: 80px;
+    margin-left: 220px;
+    /* matches sidebar width */
     padding: 20px;
 }
 
@@ -187,22 +191,25 @@ footer {
         display: flex;
     }
 
-    .sidebar {
-        transform: translateX(-100%);
-        top: 70px;
+    .top-menu {
+        display: none;
     }
 
+    /* Sidebar hidden off-screen */
+    .sidebar {
+        transform: translateX(-100%);
+        width: 220px;
+        top: 95px;
+    }
+
+    /* Sidebar when opened */
     .sidebar.active {
         transform: translateX(0);
     }
 
+    /* Content adjusts when sidebar hidden */
     .main-content {
         margin-left: 0;
-        margin-top: 100px;
         padding: 20px;
-    }
-
-    .top-menu {
-        display: none;
     }
 }
