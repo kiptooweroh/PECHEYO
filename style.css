@@ -22,6 +22,12 @@ body {
     /* space for navbar */
 }
 
+.page-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 /* ===== Top Navbar ===== */
 .top-nav {
     width: 100%;
@@ -149,8 +155,9 @@ body {
 .main-content {
     flex: 1;
     margin-left: 220px;
-    /* match sidebar width */
     padding: 20px;
+    padding-bottom: 120px;
+    /* space for footer */
     transition: margin-left 0.3s ease;
     min-height: calc(100vh - 80px);
 }
@@ -184,16 +191,15 @@ body {
     margin-bottom: 40px;
 }
 
-/* ===== Horizontal Rules ===== */
+/* Horizontal Rules */
 hr {
     border: none;
     height: 1px;
     background-color: #ccc;
     margin: 30px 0;
-    /* spacing to prevent overlap */
 }
 
-/* ===== Headings and Text ===== */
+/* Headings and Paragraphs */
 h1,
 h2,
 h3,
@@ -215,12 +221,13 @@ footer {
     color: white;
     padding: 20px 0;
     margin-top: auto;
+    /* push footer to bottom */
+    width: 100%;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
 
-    /* Show hamburger, hide top menu */
     #menuToggle {
         display: flex;
     }
@@ -229,34 +236,28 @@ footer {
         display: none;
     }
 
-    /* Sidebar hidden off-screen */
     .sidebar {
         transform: translateX(-100%);
         position: fixed;
     }
 
-    /* Sidebar slides over content when active */
     .sidebar.active {
         transform: translateX(0);
     }
 
-    /* Main content full width by default */
     .main-content {
         margin-left: 0;
         transition: none;
     }
 
-    /* Push main content slightly when sidebar opens */
     .main-content.shifted {
         margin-left: 220px;
     }
 
-    /* Adjust navbar title for hamburger */
     .top-nav h2 {
         margin-left: 50px;
     }
 
-    /* Hero text not overlapped */
     .hero {
         margin-top: 20px;
     }
