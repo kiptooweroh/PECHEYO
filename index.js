@@ -18,7 +18,7 @@ function renderAnnouncements() {
                     <div class="announcement-box">
                         <h3>${a.title}</h3>
                         <p>${a.message}</p>
-                        <small>${a.timestamp ? a.timestamp.toDate().toLocaleString() : "Just now"}</small>
+                        <small>${a.timestamp ? a.timestamp.toDate().toLocaleString() : a.date || "Just now"}</small>
                     </div>
                 `;
 
@@ -65,7 +65,8 @@ const logoutBtn = document.getElementById("logoutBtn");
 if (logoutBtn) {
     logoutBtn.addEventListener("click", () => {
         firebase.auth().signOut()
-            .then(() => window.location.href = "login.html");
+            .then(() => window.location.href = "login.html")
+            .catch(err => console.error("Logout error:", err));
     });
 }
 
@@ -88,8 +89,13 @@ const announcementForm = document.getElementById("announcementForm");
 if (announcementForm) {
     announcementForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const title = document.getElementById("title").value;
-        const message = document.getElementById("message").value;
+        const title = document.getElementById("title").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!title || !message) {
+            alert("Both title and message are required.");
+            return;
+        }
 
         try {
             await db.collection("announcements").add({
@@ -104,4 +110,60 @@ if (announcementForm) {
             console.error("Error posting announcement:", err);
         }
     });
+}
+
+// ====================
+// REAL-TIME CONTACT MESSAGES
+// ====================
+const contactForm = document.getElementById("contact-form");
+const contactMessageDiv = document.getElementById("contactMessages"); // Optional: dashboard div
+
+if (contactForm) {
+    contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = contactForm.user_name.value.trim();
+        const email = contactForm.user_email.value.trim();
+        const message = contactForm.message.value.trim();
+
+        if (!name || !email || !message) {
+            alert("All fields are required.");
+            return;
+        }
+
+        try {
+            await db.collection("contactMessages").add({
+                name,
+                email,
+                message,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                date: new Date().toLocaleString()
+            });
+
+            alert("Message sent successfully!");
+            contactForm.reset();
+
+        } catch (err) {
+            console.error("Error sending contact message:", err);
+        }
+    });
+}
+
+// Optional: Render contact messages live in a dashboard
+if (contactMessageDiv) {
+    db.collection("contactMessages")
+        .orderBy("timestamp", "desc")
+        .onSnapshot(snapshot => {
+            contactMessageDiv.innerHTML = "";
+            snapshot.forEach(doc => {
+                const c = doc.data();
+                const card = `
+                    <div class="contact-box">
+                        <h4>${c.name} (${c.email})</h4>
+                        <p>${c.message}</p>
+                        <small>${c.timestamp ? c.timestamp.toDate().toLocaleString() : c.date || "Just now"}</small>
+                    </div>
+                `;
+                contactMessageDiv.innerHTML += card;
+            });
+        });
 }

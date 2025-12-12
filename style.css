@@ -22,10 +22,11 @@ body {
     /* space for navbar */
 }
 
+/* ===== Page Wrapper ===== */
 .page-wrapper {
     flex: 1;
     display: flex;
-    flex-direction: column;
+    /* allows main content + sidebar */
 }
 
 /* ===== Top Navbar ===== */
@@ -38,7 +39,6 @@ body {
     top: 0;
     left: 0;
     z-index: 1500;
-    /* always on top */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -72,7 +72,7 @@ body {
     width: 220px;
     position: fixed;
     top: 80px;
-    /* directly under navbar */
+    /* under navbar */
     left: 0;
     background: #34495e;
     color: white;
@@ -80,7 +80,6 @@ body {
     padding-top: 20px;
     transition: transform 0.3s ease;
     z-index: 1000;
-    /* under navbar */
 }
 
 .sidebar ul {
@@ -102,6 +101,7 @@ body {
     border: none;
     font-size: 16px;
     cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .sidebar ul li a:hover,
@@ -113,6 +113,8 @@ body {
     display: none;
     list-style: none;
     padding-left: 15px;
+    transition: max-height 0.3s ease;
+    overflow: hidden;
 }
 
 /* ===== Hamburger Toggle ===== */
@@ -190,6 +192,44 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 40px;
+}
+
+/* Forms */
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+form button {
+    padding: 12px 20px;
+    background-color: #2d2d7f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s ease;
+}
+
+form button:hover {
+    background-color: #1a1a5c;
+}
+
+#form-message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#message-preview {
+    margin-top: 15px;
+    padding: 10px;
+    background: #eef;
+    border-radius: 5px;
 }
 
 /* Horizontal Rules */

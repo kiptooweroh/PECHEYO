@@ -8,58 +8,96 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <style>
+        /* Ensure footer sticks to bottom */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .page-wrapper {
+            flex: 1;
+            display: flex;
+        }
+
+        .main-content {
+            flex: 1;
+            margin-left: 220px;
+            /* match sidebar width */
+            padding: 100px 40px 40px 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #2d2d7f;
+            color: white;
+            margin-top: auto;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <nav class="top-nav">
-            <h2>PECHEYO CHURCH</h2>
-            <ul class="top-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="sermons.html">Live Sermons</a></li>
+
+    <div class="page-wrapper">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <ul>
+                <li><button class="dropdown-btn">Services ▾</button>
+                    <ul class="dropdown-container">
+                        <li><a href="services.html#sunday">Sunday Service</a></li>
+                        <li><a href="services.html#wednesday">Wednesday Bible Study</a></li>
+                        <li><a href="services.html#friday">Friday Prayer Meeting</a></li>
+                    </ul>
+                </li>
+                <li><button class="dropdown-btn">Sermons ▾</button>
+                    <ul class="dropdown-container">
+                        <li><a href="sermons.html#live">Live Sermons</a></li>
+                        <li><a href="sermons.html#recorded">Recorded Sermons</a></li>
+                    </ul>
+                </li>
                 <li><a class="active" href="announcements.html">Announcements</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
-        </nav>
-    </header>
+        </aside>
 
-    <aside class="sidebar">
-        <ul>
-            <li><button class="dropdown-btn">Services ▾</button>
-                <ul class="dropdown-container">
-                    <li><a href="services.html#sunday">Sunday Service</a></li>
-                    <li><a href="services.html#wednesday">Wednesday Bible Study</a></li>
-                    <li><a href="services.html#friday">Friday Prayer Meeting</a></li>
+        <!-- Navbar -->
+        <header>
+            <nav class="top-nav">
+                <h2>PECHEYO CHURCH</h2>
+                <ul class="top-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="sermons.html">Live Sermons</a></li>
+                    <li><a class="active" href="announcements.html">Announcements</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
-            </li>
-            <li><button class="dropdown-btn">Sermons ▾</button>
-                <ul class="dropdown-container">
-                    <li><a href="sermons.html#live">Live Sermons</a></li>
-                    <li><a href="sermons.html#recorded">Recorded Sermons</a></li>
-                </ul>
-            </li>
-            <li><a href="announcements.html">Announcements</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </aside>
+            </nav>
+        </header>
 
-    <div class="main-content">
-        <div class="page-banner">Church Announcements</div>
-        <div class="container">
-            <section>
-                <h2>Latest Announcements</h2>
-                <div id="latestAnnouncement"></div>
-            </section>
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="page-banner">Church Announcements</div>
+            <div class="container">
+                <section>
+                    <h2>Latest Announcements</h2>
+                    <div id="latestAnnouncement"></div>
+                </section>
 
-            <section>
-                <h2>All Announcements</h2>
-                <div id="allAnnouncements"></div>
-            </section>
+                <section>
+                    <h2>All Announcements</h2>
+                    <div id="allAnnouncements"></div>
+                </section>
+            </div>
         </div>
-    </div>
 
+    </div> <!-- end page-wrapper -->
+
+    <!-- Footer -->
     <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
 
     <script src="js/firebaseConfig.js"></script>
@@ -68,6 +106,7 @@
         const allContainer = document.getElementById("allAnnouncements");
         listenToAnnouncements(latestContainer, allContainer);
 
+        // Sidebar dropdown
         const dropdowns = document.querySelectorAll(".dropdown-btn");
         dropdowns.forEach(btn => {
             btn.addEventListener("click", () => {
