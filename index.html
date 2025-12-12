@@ -9,26 +9,40 @@
 </head>
 
 <body>
-    <!-- Hamburger menu for small screens -->
-    <button id="menuToggle">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-    </button>
+
+    <!-- Top Navbar -->
+    <nav class="top-nav">
+        <h2>PECHEYO CHURCH</h2>
+
+        <!-- Hamburger -->
+        <div id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <!-- Desktop Menu -->
+        <ul class="top-menu">
+            <li><a class="active" href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="sermons.html">Live Sermons</a></li>
+            <li><a href="announcements.html">Announcements</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
 
     <!-- Sidebar -->
     <aside class="sidebar">
         <ul>
-            <li>
-                <button class="dropdown-btn">Services ▾</button>
+            <li><button class="dropdown-btn">Services ▾</button>
                 <ul class="dropdown-container">
                     <li><a href="services.html#sunday">Sunday Service</a></li>
                     <li><a href="services.html#wednesday">Wednesday Bible Study</a></li>
                     <li><a href="services.html#friday">Friday Prayer Meeting</a></li>
                 </ul>
             </li>
-            <li>
-                <button class="dropdown-btn">Sermons ▾</button>
+            <li><button class="dropdown-btn">Sermons ▾</button>
                 <ul class="dropdown-container">
                     <li><a href="sermons.html#live">Live Sermons</a></li>
                     <li><a href="sermons.html#recorded">Recorded Sermons</a></li>
@@ -39,57 +53,26 @@
         </ul>
     </aside>
 
-    <!-- Top Navbar -->
-    <header>
-        <nav class="top-nav">
-            <h2>PECHEYO CHURCH</h2>
-            <ul class="top-menu">
-                <li><a class="active" href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="sermons.html">Live Sermons</a></li>
-                <li><a href="announcements.html">Announcements</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Main content -->
+    <!-- Main Content -->
     <div class="main-content">
         <div class="hero">
             <h1>WELCOME TO PEFA CHESOEN Church<br>“A Place of Worship, Love and Truth”</h1>
         </div>
         <div class="container">
-            <section>
-                <h2>Weekly Service Schedule</h2>
-                <p><strong>Sunday Service:</strong> 9:00AM – 12:30PM</p>
-                <p><strong>Wednesday Bible Study:</strong> 6:00PM – 8:00PM</p>
-                <p><strong>Friday Prayer Meeting:</strong> 7:00PM – 9:00PM</p>
-            </section>
-            <section>
-                <h2>Latest Announcement</h2>
-                <div id="latestAnnouncement"></div>
-            </section>
-            <section>
-                <h2>All Announcements</h2>
-                <div id="allAnnouncements"></div>
-            </section>
+            <h2>Weekly Service Schedule</h2>
+            <p><strong>Sunday Service:</strong> 9:00AM – 12:30PM</p>
+            <p><strong>Wednesday Bible Study:</strong> 6:00PM – 8:00PM</p>
+            <p><strong>Friday Prayer Meeting:</strong> 7:00PM – 9:00PM</p>
         </div>
     </div>
 
-    <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
+    <!-- Footer -->
+    <footer>
+        © 2025 Pecheyo Church | All Rights Reserved
+    </footer>
 
-    <script src="js/firebaseConfig.js"></script>
+    <!-- JS -->
     <script>
-        // Sidebar toggle for hamburger
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.querySelector('.sidebar');
-
-        menuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('active');
-            menuToggle.classList.toggle('open');
-        });
-
         // Sidebar dropdown
         const dropdowns = document.querySelectorAll(".dropdown-btn");
         dropdowns.forEach(btn => {
@@ -98,6 +81,15 @@
                 const dropdown = btn.nextElementSibling;
                 dropdown.style.display = (dropdown.style.display === "block") ? "none" : "block";
             });
+        });
+
+        // Hamburger toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.querySelector('.sidebar');
+
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            menuToggle.classList.toggle('open');
         });
     </script>
 </body>

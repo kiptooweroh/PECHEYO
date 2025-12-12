@@ -38,7 +38,6 @@ body {
 
 .top-nav h2 {
     font-size: 24px;
-    letter-spacing: 1px;
 }
 
 .top-menu {
@@ -110,23 +109,24 @@ body {
     position: fixed;
     top: 15px;
     left: 15px;
-    background: none;
-    border: none;
+    width: 35px;
+    height: 30px;
+    flex-direction: column;
+    justify-content: space-between;
     cursor: pointer;
     z-index: 1100;
 }
 
 #menuToggle .bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px 0;
+    height: 4px;
+    width: 100%;
     background-color: white;
-    transition: 0.4s;
+    border-radius: 2px;
+    transition: all 0.3s ease;
 }
 
 #menuToggle.open .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
+    transform: rotate(-45deg) translate(-7px, 7px);
 }
 
 #menuToggle.open .bar:nth-child(2) {
@@ -134,7 +134,7 @@ body {
 }
 
 #menuToggle.open .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
+    transform: rotate(45deg) translate(-7px, -7px);
 }
 
 /* ===== Main Content ===== */
@@ -178,14 +178,13 @@ footer {
     background-color: #2d2d7f;
     color: white;
     padding: 20px 0;
-    font-size: 0.9em;
     margin-top: auto;
 }
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     #menuToggle {
-        display: block;
+        display: flex;
     }
 
     .sidebar {
@@ -204,7 +203,6 @@ footer {
     }
 
     .top-menu {
-        flex-direction: column;
-        gap: 10px;
+        display: none;
     }
 }
