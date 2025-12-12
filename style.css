@@ -18,8 +18,8 @@ body {
     background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
     color: #333;
     line-height: 1.6;
-    padding-top: 95px;
-    /* Global fix for navbar height */
+    padding-top: 80px;
+    /* space for navbar */
 }
 
 /* ===== Top Navbar ===== */
@@ -31,7 +31,8 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 1500;
+    /* always on top */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -64,15 +65,16 @@ body {
 .sidebar {
     width: 220px;
     position: fixed;
-    top: 95px;
-    /* below navbar */
+    top: 80px;
+    /* directly under navbar */
     left: 0;
     background: #34495e;
     color: white;
-    height: calc(100% - 95px);
+    height: calc(100% - 80px);
     padding-top: 20px;
     transition: transform 0.3s ease;
-    z-index: 900;
+    z-index: 1000;
+    /* under navbar */
 }
 
 .sidebar ul {
@@ -110,15 +112,17 @@ body {
 /* ===== Hamburger Toggle ===== */
 #menuToggle {
     display: none;
-    position: fixed;
-    top: 23px;
+    position: absolute;
+    top: 50%;
     left: 15px;
+    transform: translateY(-50%);
     width: 35px;
     height: 30px;
     flex-direction: column;
     justify-content: space-between;
     cursor: pointer;
-    z-index: 1100;
+    z-index: 1600;
+    /* above everything */
 }
 
 #menuToggle .bar {
@@ -145,8 +149,10 @@ body {
 .main-content {
     flex: 1;
     margin-left: 220px;
-    /* matches sidebar width */
+    /* match sidebar width */
     padding: 20px;
+    transition: margin-left 0.3s ease;
+    /* smooth push on mobile */
 }
 
 /* Hero Section */
@@ -187,6 +193,8 @@ footer {
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
+
+    /* Show hamburger, hide top menu */
     #menuToggle {
         display: flex;
     }
@@ -198,18 +206,25 @@ footer {
     /* Sidebar hidden off-screen */
     .sidebar {
         transform: translateX(-100%);
-        width: 220px;
-        top: 95px;
     }
 
-    /* Sidebar when opened */
+    /* Sidebar slides over content when active */
     .sidebar.active {
         transform: translateX(0);
     }
 
-    /* Content adjusts when sidebar hidden */
+    /* Push main content slightly when sidebar opens */
+    .main-content.shifted {
+        margin-left: 220px;
+    }
+
+    /* Main content full width by default */
     .main-content {
         margin-left: 0;
-        padding: 20px;
+    }
+
+    /* Push navbar title right to avoid hamburger overlap */
+    .top-nav h2 {
+        margin-left: 50px;
     }
 }
