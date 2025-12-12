@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pecheyo Church | Home</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h2>PECHEYO CHURCH</h2>
+            <ul>
+                <li><a class="active" href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="sermons.html">Live Sermons</a></li>
+                <li><a href="announcements.html">Announcements</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <h1>WELCOME TO PEFA CHESOEN Church<br>“A Place of Worship, Love and Truth”</h1>
+    </div>
+
+    <div class="container">
+        <section>
+            <h2>Weekly Service Schedule</h2>
+            <p><strong>Sunday Service:</strong> 9:00AM – 12:30PM</p>
+            <p><strong>Wednesday Bible Study:</strong> 6:00PM – 8:00PM</p>
+            <p><strong>Friday Prayer Meeting:</strong> 7:00PM – 9:00PM</p>
+        </section>
+
+        <section>
+            <h2>Latest Announcement</h2>
+            <div id="latestAnnouncement"></div>
+        </section>
+
+        <section>
+            <h2>All Announcements</h2>
+            <div id="allAnnouncements"></div>
+        </section>
+    </div>
+
+    <footer>© 2025 Pecheyo Church | All Rights Reserved</footer>
+
+    <script src="js/firebaseConfig.js"></script>
+    <script>
+        const latestContainer = document.getElementById("latestAnnouncement");
+        const allContainer = document.getElementById("allAnnouncements");
+        listenToAnnouncements(latestContainer, allContainer);
+    </script>
+
+</body>
+
+</html>
